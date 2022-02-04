@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const Content = styled.header`
-  width: 100%;
+  width: 100vw;
   height: 73px;
   background: #0d161f;
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding: 17px;
+  border-bottom: 1px solid silver;
 `;
 
 export const Imglogo = styled.div`
