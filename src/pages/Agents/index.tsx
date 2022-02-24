@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Content,
   FilterAgents,
@@ -32,9 +32,14 @@ import Viper from '../../assets/Viper.png';
 import Cypher from '../../assets/Cypher.png';
 import Reyna from '../../assets/Reyna.png';
 
+import ModalAgents from '../Agents/modal';
+
 const Agents: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <Content>
+      <ModalAgents open={openModal} closeModal={() => setOpenModal(false)} />
       <FilterAgents>
         <h1>AGENTES</h1>
 
@@ -102,7 +107,7 @@ const Agents: React.FC = () => {
         </Filters>
       </SectionFilters>
       <Agent>
-        <AddAgent>
+        <AddAgent onClick={() => setOpenModal(true)}>
           <img src={Adicionar} alt='sinal de adição' />
           <p>Adicionar</p>
         </AddAgent>

@@ -15,7 +15,41 @@ div.MuiFormControl-root.select-agent{
     border-radius:4px;
 }
 
+.MuiModal-root.agents-skill.css-79ws1d-MuiModal-root{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+   
+}
 
+div.sc-bBHxTw{
+    display:grid;
+    gap:15px;
+
+}
+
+div.MuiFormControl-root.select-function-agent{
+width: 300px;
+height: 40px;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #133052;
+border-radius: 5px;
+}
+
+
+div.MuiFormControl-root.input-skill{
+width: 300px;
+height: 40px;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #133052;
+border-radius: 5px;
+}
+
+div.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
+width: 300px;
+height: 40px;
+
+}
 
 `;
 

@@ -65,6 +65,7 @@ export const AddAgent = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 24px;
+  cursor: pointer;
   img {
     width: 20px;
     height: 20px;
@@ -85,6 +86,7 @@ export const Persona = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
+
   img {
     width: 250px;
     height: 300px;
