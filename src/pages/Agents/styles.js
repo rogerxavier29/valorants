@@ -78,14 +78,17 @@ export const AddAgent = styled.div`
 `;
 
 export const Persona = styled.div`
-  width: 260px;
-  height: 310px;
-  border: 1px solid #133052;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
+  margin-bottom: 20px;
+  div {
+    width: 260px;
+    height: 310px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #133052;
+  }
 
   img {
     width: 250px;
@@ -100,7 +103,6 @@ export const Persona = styled.div`
       background: transparent
         linear-gradient(180deg, #e1315712 10%, #e1315775 80%, #e13157 100%) 0%
         0% no-repeat padding-box;
-      border: 1px solid #133052;
     }
   }
   p {

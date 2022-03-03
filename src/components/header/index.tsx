@@ -14,7 +14,7 @@ const Header: React.FC = () => {
           <li>AGENTES</li>
         </a>
 
-        <a href='http:/maps'>
+        <a href='#maps'>
           {' '}
           <li>MAPAS</li>
         </a>

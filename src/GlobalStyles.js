@@ -15,6 +15,13 @@ div.MuiFormControl-root.select-agent{
     border-radius:4px;
 }
 
+.MuiModal-root.agents-add.css-79ws1d-MuiModal-root{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+   
+}
+
 .MuiModal-root.agents-skill.css-79ws1d-MuiModal-root{
     display:flex;
     justify-content: center;

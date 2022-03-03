@@ -33,7 +33,7 @@ export default function ModalAgents({
 }: IProps): React.ReactElement {
   return (
     <div>
-      <Modal className='agents-skill' open={open} onClose={closeModal}>
+      <Modal className='agents-add' open={open} onClose={closeModal}>
         <Content>
           <BtnClose>
             {' '}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Content,
   FilterAgents,
@@ -32,14 +32,29 @@ import Viper from '../../assets/Viper.png';
 import Cypher from '../../assets/Cypher.png';
 import Reyna from '../../assets/Reyna.png';
 
-import ModalAgents from '../Agents/modal';
+import ModalAgents from './modalAddAgent';
+import ModalSkill from './modalSkillAgents';
+
+import { getAgents } from '../../services/Agents';
 
 const Agents: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openModalSkill, setOpenModalSkill] = useState(false);
+
+  const [agents, setAgents] = React.useState([]);
+
+  useEffect(() => {
+    getAgents()
+      .then((response: any) => {
+        setAgents(response);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <Content>
       <ModalAgents open={openModal} closeModal={() => setOpenModal(false)} />
+
       <FilterAgents>
         <h1>AGENTES</h1>
 
@@ -111,90 +126,43 @@ const Agents: React.FC = () => {
           <img src={Adicionar} alt='sinal de adição' />
           <p>Adicionar</p>
         </AddAgent>
-        <Persona>
-          <img src={Jett} alt='Agente Jett' />
-          <p>JETT</p>
-        </Persona>
-        <Persona>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Raze}
-            alt='Agente Raze'
-          />
-          <p>RAZE</p>
-        </Persona>
-        <Persona>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Breach}
-            alt='Agente Breach'
-          />
-          <p>BREACH</p>
-        </Persona>
-        <Persona>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Omen}
-            alt='Agente Omen'
-          />
-          <p>OMEN</p>
-        </Persona>
-        <Persona>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Brimstone}
-            alt='Agente Brimstone'
-          />
-          <p>BRIMSTONE</p>
-        </Persona>
-        <Persona>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Phoenix}
-            alt='Agente Phoenix'
-          />
-          <p>PHOENIX</p>
-        </Persona>
-        <Persona>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Sage}
-            alt='Agente Sage'
-          />
-          <p>SAGE</p>
-        </Persona>
-        <Persona style={{ marginTop: '24px' }}>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Sova}
-            alt='Agente Sova'
-          />
-          <p>SOVA</p>
-        </Persona>
-        <Persona style={{ marginTop: '24px' }}>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Viper}
-            alt='Agente Viper'
-          />
-          <p>VIPER</p>
-        </Persona>
-        <Persona style={{ marginTop: '24px' }}>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Cypher}
-            alt='Agente Chyper'
-          />
-          <p>CYPER</p>
-        </Persona>
-        <Persona style={{ marginTop: '24px' }}>
-          <img
-            style={{ border: '1px solid #133052' }}
-            src={Reyna}
-            alt='Agente Reyna'
-          />
-          <p>REYNA</p>
-        </Persona>
+        {agents?.map((data) => (
+          <Persona>
+            <div onClick={() => setOpenModalSkill(true)}>
+              {data?.name === 'Jett' ? (
+                <img src={Jett} alt='Agente Jett' />
+              ) : data.name === 'Raze' ? (
+                <img src={Raze} alt='Agente Jett' />
+              ) : data.name === 'Breach' ? (
+                <img src={Breach} alt='Agente Jett' />
+              ) : data.name === 'Omen' ? (
+                <img src={Omen} alt='Agente Jett' />
+              ) : data.name === 'Brimstone' ? (
+                <img src={Brimstone} alt='Agente Jett' />
+              ) : data.name === 'Phoenix' ? (
+                <img src={Phoenix} alt='Agente Jett' />
+              ) : data.name === 'Sage' ? (
+                <img src={Sage} alt='Agente Jett' />
+              ) : data.name === 'Sova' ? (
+                <img src={Sova} alt='Agente Jett' />
+              ) : data.name === 'Viper' ? (
+                <img src={Viper} alt='Agente Jett' />
+              ) : data.name === 'Cypher' ? (
+                <img src={Cypher} alt='Agente Jett' />
+              ) : data.name === 'Reyna' ? (
+                <img src={Reyna} alt='Agente Jett' />
+              ) : null}
+              <p>{data?.name}</p>
+            </div>
+            {openModalSkill ? (
+              <ModalSkill
+                open={openModalSkill}
+                closeModal={() => setOpenModalSkill(false)}
+                agentSkill={data}
+              />
+            ) : null}
+          </Persona>
+        ))}
       </Agent>
     </Content>
   );
