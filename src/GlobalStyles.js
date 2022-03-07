@@ -23,7 +23,7 @@ div.MuiFormControl-root.select-agent{
 }
 
 .MuiModal-root.agents-skill.css-79ws1d-MuiModal-root{
-    display:flex;
+    display:grid;
     justify-content: center;
     align-items:center;
    

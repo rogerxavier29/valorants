@@ -39,7 +39,7 @@ import { getAgents } from '../../services/Agents';
 
 const Agents: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [openModalSkill, setOpenModalSkill] = useState(false);
+  const [openModalSkill, setOpenModalSkill] = React.useState<string>('');
 
   const [agents, setAgents] = React.useState([]);
 
@@ -54,6 +54,15 @@ const Agents: React.FC = () => {
   return (
     <Content>
       <ModalAgents open={openModal} closeModal={() => setOpenModal(false)} />
+      {openModalSkill ? (
+        <ModalSkill
+          open={true}
+          closeModal={() => setOpenModalSkill('')}
+          agentSkill={openModalSkill}
+        />
+      ) : (
+        ''
+      )}
 
       <FilterAgents>
         <h1>AGENTES</h1>
@@ -128,7 +137,7 @@ const Agents: React.FC = () => {
         </AddAgent>
         {agents?.map((data) => (
           <Persona>
-            <div onClick={() => setOpenModalSkill(true)}>
+            <div onClick={() => setOpenModalSkill(data)}>
               {data?.name === 'Jett' ? (
                 <img src={Jett} alt='Agente Jett' />
               ) : data.name === 'Raze' ? (
@@ -154,13 +163,6 @@ const Agents: React.FC = () => {
               ) : null}
               <p>{data?.name}</p>
             </div>
-            {openModalSkill ? (
-              <ModalSkill
-                open={openModalSkill}
-                closeModal={() => setOpenModalSkill(false)}
-                agentSkill={data}
-              />
-            ) : null}
           </Persona>
         ))}
       </Agent>

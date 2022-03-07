@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
 
-import { Content } from './styles';
+import { Content, Skills, Description } from './styles';
+import Jett from '../../../assets/Agent.png';
+import Agents from '..';
 
 interface IProps {
   closeModal: () => void;
@@ -18,9 +20,31 @@ export default function ModalSkill({
     <div>
       <Modal className='agents-skill' open={open} onClose={closeModal}>
         <Content>
-          <p>FUNÇÃO</p>
-          <h1>{agentSkill.function}</h1>
-          <div>{agentSkill.description}</div>
+          <Description>
+            <h1>FUNÇÃO</h1>
+
+            <p>{agentSkill.function}</p>
+            <section>{agentSkill.description}</section>
+
+            <h2>Habilidades</h2>
+            <Skills>
+              <div>
+                <li>Arma Branca</li>
+                <li>Arma Primaria</li>
+                <li>Arma Segundaria</li>
+                <li>Especial</li>
+              </div>
+              <div>
+                {agentSkill.skills.map((data) => (
+                  <li>
+                    <span>{data.damage} Dano</span>
+                  </li>
+                ))}
+              </div>
+            </Skills>
+          </Description>
+
+          <img src={Jett} alt='' />
         </Content>
       </Modal>
     </div>
