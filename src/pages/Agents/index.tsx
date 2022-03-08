@@ -53,13 +53,18 @@ const Agents: React.FC = () => {
 
   return (
     <Content>
-      <ModalAgents open={openModal} closeModal={() => setOpenModal(false)} />
       {openModalSkill ? (
         <ModalSkill
           open={true}
           closeModal={() => setOpenModalSkill('')}
           agentSkill={openModalSkill}
         />
+      ) : (
+        ''
+      )}
+
+      {openModal ? (
+        <ModalAgents open={openModal} closeModal={() => setOpenModal(false)} />
       ) : (
         ''
       )}
@@ -135,7 +140,7 @@ const Agents: React.FC = () => {
           <img src={Adicionar} alt='sinal de adição' />
           <p>Adicionar</p>
         </AddAgent>
-        {agents?.map((data) => (
+        {agents?.map((data: any) => (
           <Persona>
             <div onClick={() => setOpenModalSkill(data)}>
               {data?.name === 'Jett' ? (
