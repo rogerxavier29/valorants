@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Modal from '@mui/material/Modal';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { Form, Formik, Field, FieldArray } from 'formik';
+import { TextField, Select } from 'formik-material-ui';
+import { validationSchema, initialValues } from './validation';
 
 import {
   Content,
@@ -14,65 +15,66 @@ import {
   BtnsForm,
 } from './styles';
 
-import { FormControl, Select, InputLabel, TextField } from '@material-ui/core';
+import { FormControl, InputLabel, InputBase } from '@material-ui/core';
 
 import Adicionar from '../../../assets/adicionar.svg';
-import { MenuItem } from '@mui/material';
+import { Button, Input, MenuItem } from '@mui/material';
 
-import { getFunct } from './List';
+import { data } from './List';
+import { AnyCnameRecord } from 'dns';
 
 interface IProps {
   closeModal: () => void;
   open: boolean;
+  agentValorant: any;
+  newAgent: (value: any[]) => void;
 }
 
 export default function ModalAgents({
   closeModal,
   open,
+  agentValorant,
+  newAgent,
 }: IProps): React.ReactElement {
   const [functAgents, setFunctAgents] = React.useState([]);
+  const [baseImage, setBaseImage] = useState<any>('');
 
-  const validationSchema = Yup.object({
-    funct: Yup.string('Insira a função do Agente'),
-    hab1: Yup.string('Insira habilidade 1').required('Obrigatório'),
-    hab2: Yup.string('Insira habilidade 2').required('Obrigatório'),
-    hab3: Yup.string('Insira habilidade 3').required('Obrigatório'),
-    hab4: Yup.string('Insira habilidade 4').required('Obrigatório'),
-    description: Yup.string('Insira a descrição do Agente').required(
-      'Obrigatório',
-    ),
-    damage1: Yup.number('Insira o dano 1').required('Obrigatório'),
-    damage2: Yup.number('Insira o dano 2').required('Obrigatório'),
-    demage3: Yup.number('Insira o dano 3').required('Obrigatório'),
-    demage4: Yup.number('Insira o dano 4').required('Obrigatório'),
-  });
+  // useEffect(() => {
+  //   getFunct()
+  //     .then((response: any) => {
+  //       setFunctAgents(response);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
 
-  const formik = useFormik({
-    initialValues: {
-      funct: '',
-      hab1: '',
-      hab2: '',
-      hab3: '',
-      hab4: '',
-      description: '',
-      damage1: '',
-      damage2: '',
-      damage3: '',
-      damage4: '',
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const uploadImage = async (e: any) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBaseImage(base64);
+  };
 
-  useEffect(() => {
-    getFunct()
-      .then((response: any) => {
-        setFunctAgents(response);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const convertBase64 = (file: any) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  function handleSubmit(values: any) {
+    values.image = baseImage;
+    console.log(values);
+    const aux = [...agentValorant];
+    aux.push(values);
+    newAgent(aux);
+  }
 
   return (
     <div>
@@ -85,141 +87,141 @@ export default function ModalAgents({
           <Title>
             <p>Adicionar agente</p>
           </Title>
-          <form onSubmit={formik.handleSubmit}>
-            <SkillForm>
-              <ColumnOne>
-                <FormControl className='select-function-agent'>
-                  <TextField
-                    id='funct'
-                    select
-                    name='funct'
-                    label='Função'
-                    variant='outlined'
-                    value={formik.values.funct}
-                    onChange={formik.handleChange}
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={(values: any) => {}}
+          >
+            {({ values }) => (
+              <Form>
+                <SkillForm>
+                  <ColumnOne>
+                    <Field
+                      id='function'
+                      name='function'
+                      label='Função'
+                      variant='outlined'
+                      component={Select}
+                    >
+                      {data.map((data: any) => (
+                        <MenuItem key={data.value} value={data.value}>
+                          {data.label}
+                        </MenuItem>
+                      ))}
+                    </Field>
+
+                    <Field
+                      id='name'
+                      name='name'
+                      variant='outlined'
+                      placeholder='Nome'
+                      component={TextField}
+                    />
+
+                    <Field
+                      name='random'
+                      variant='outlined'
+                      placeholder='Habilidade - 2'
+                      component={TextField}
+                      // error={
+                      //   formik.touched.hab2 && Boolean(formik.errors.hab2)
+                      // }
+                      // helperText={formik.touched.hab2 && formik.errors.hab2}
+                    />
+
+                    <Field
+                      name='random'
+                      variant='outlined'
+                      placeholder='Habilidade - 3'
+                      component={TextField}
+                      // error={
+                      //   formik.touched.hab3 && Boolean(formik.errors.hab3)
+                      // }
+                      // helperText={formik.touched.hab3 && formik.errors.hab3}
+                    />
+
+                    <Field
+                      name='random'
+                      variant='outlined'
+                      placeholder='Habilidade - 4'
+                      component={TextField}
+                      // error={
+                      //   formik.touched.hab4 && Boolean(formik.errors.hab4)
+                      // }
+                      // helperText={formik.touched.hab4 && formik.errors.hab4}
+                    />
+                  </ColumnOne>
+
+                  <ColumnTwo>
+                    <Field
+                      id='description'
+                      name='description'
+                      variant='outlined'
+                      placeholder='Descrição'
+                      component={TextField}
+                      // error={
+                      //   formik.touched.hab4 && Boolean(formik.errors.hab4)
+                      // }
+                      // helperText={formik.touched.hab4 && formik.errors.hab4}
+                    />
+
+                    <FieldArray name='skills'>
+                      {({ push, remove }) => (
+                        <>
+                          {values.skills.map((skill: any, index: number) => (
+                            <div key={index}>
+                              <Field
+                                required
+                                type='number'
+                                name={`skills.${index}.damage`}
+                                component={TextField}
+                                variant='outlined'
+                                label={`Dano Habilidade - ${skill.type}`}
+                              />
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </FieldArray>
+                  </ColumnTwo>
+
+                  <AddPhoto>
+                    <Input
+                      inputProps={{ accept: 'image/*' }}
+                      // style={{ display: 'none' }}
+                      id='image'
+                      name='image'
+                      type='file'
+                      // ref={uploadInputRef}
+                      onChange={(e) => {
+                        uploadImage(e);
+                      }}
+                    />
+                    <div
+                    // onClick={() => {
+                    //   uploadInputRef.current &&
+                    //     uploadInputRef.current.click();
+                    // }}
+                    >
+                      <img src={Adicionar} alt='icone de adicionar' />
+
+                      <p>Foto</p>
+                    </div>
+                  </AddPhoto>
+                </SkillForm>
+
+                <BtnsForm>
+                  <button className='btn-cancelar'>CANCELAR</button>
+                  <Button
+                    onClick={() => handleSubmit(values)}
+                    className='btn-salvar'
                   >
-                    {functAgents.map((data: any) => (
-                      <MenuItem key={data.value} value={data.value}>
-                        {data.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='hab1'
-                    name='hab1'
-                    variant='outlined'
-                    placeholder='Habilidade - 1'
-                    value={formik.values.hab1}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='hab2'
-                    name='hab2'
-                    variant='outlined'
-                    placeholder='Habilidade - 2'
-                    value={formik.values.hab2}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='hab3'
-                    name='hab3'
-                    variant='outlined'
-                    placeholder='Habilidade - 3'
-                    value={formik.values.hab3}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='hab4'
-                    name='hab4'
-                    variant='outlined'
-                    placeholder='Habilidade - 4'
-                    value={formik.values.hab4}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-              </ColumnOne>
-
-              <ColumnTwo>
-                <FormControl className='select-function-agent'>
-                  <TextField variant='outlined' placeholder='Habilidade - 1' />
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='damage1'
-                    name='damage1'
-                    variant='outlined'
-                    placeholder='Dano hablidade - 1'
-                    value={formik.values.damage1}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='damage2'
-                    name='damage2'
-                    variant='outlined'
-                    placeholder='Dano habilidade - 2'
-                    value={formik.values.damage2}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='damage3'
-                    name='damage3'
-                    variant='outlined'
-                    placeholder='Dano habilidade - 3'
-                    value={formik.values.damage3}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <TextField
-                    required
-                    id='damage4'
-                    name='damage4'
-                    variant='outlined'
-                    placeholder='Dano habilidade - 4'
-                    value={formik.values.damage4}
-                    onChange={formik.handleChange}
-                  />
-                </FormControl>
-              </ColumnTwo>
-              <AddPhoto>
-                <img src={Adicionar} alt='icone de adicionar' />
-                <p>Foto</p>
-              </AddPhoto>
-            </SkillForm>
-          </form>
-          <BtnsForm>
-            <button className='btn-cancelar'>CANCELAR</button>
-            <button type='submit' className='btn-salvar'>
-              SALVAR
-            </button>
-          </BtnsForm>
+                    SALVAR
+                  </Button>
+                </BtnsForm>
+              </Form>
+            )}
+          </Formik>
         </Content>
       </Modal>
     </div>

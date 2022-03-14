@@ -1,3 +1,15 @@
+import Jett from '../assets/Jett.png';
+import Raze from '../assets/Raze.png';
+import Breach from '../assets/Breach.png';
+import Omen from '../assets/Omen.png';
+import Brimstone from '../assets/Brimstone.png';
+import Phoenix from '../assets/Phoenix.png';
+import Sage from '../assets/Sage.png';
+import Sova from '../assets/Sova.png';
+import Viper from '../assets/Viper.png';
+import Cypher from '../assets/Cypher.png';
+import Reyna from '../assets/Reyna.png';
+
 export const getAgents = async () => {
   const data = [
     {
@@ -23,7 +35,7 @@ export const getAgents = async () => {
           damage: 30,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Jett,
     },
     {
       name: 'Raze',
@@ -48,7 +60,7 @@ export const getAgents = async () => {
           damage: 25,
         },
       ],
-      image: '../',
+      image: Raze,
     },
     {
       name: 'Breach',
@@ -73,7 +85,7 @@ export const getAgents = async () => {
           damage: 10,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Breach,
     },
     {
       name: 'Omen',
@@ -98,7 +110,7 @@ export const getAgents = async () => {
           damage: 20,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Omen,
     },
     {
       name: 'Brimstone',
@@ -123,7 +135,7 @@ export const getAgents = async () => {
           damage: 20,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Brimstone,
     },
     {
       name: 'Phoenix',
@@ -148,7 +160,7 @@ export const getAgents = async () => {
           damage: 30,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Phoenix,
     },
     {
       name: 'Sage',
@@ -173,7 +185,7 @@ export const getAgents = async () => {
           damage: 25,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Sage,
     },
     {
       name: 'Sova',
@@ -198,7 +210,7 @@ export const getAgents = async () => {
           damage: 40,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Sova,
     },
     {
       name: 'Viper',
@@ -223,7 +235,7 @@ export const getAgents = async () => {
           damage: 15,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Viper,
     },
     {
       name: 'Cypher',
@@ -248,7 +260,7 @@ export const getAgents = async () => {
           damage: 20,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Cypher,
     },
     {
       name: 'Reyna',
@@ -273,7 +285,7 @@ export const getAgents = async () => {
           damage: 45,
         },
       ],
-      image: '../assets/Jett.png',
+      image: Reyna,
     },
   ];
 

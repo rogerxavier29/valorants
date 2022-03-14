@@ -29,7 +29,7 @@ export const Title = styled.div`
 `;
 
 export const SkillForm = styled.div`
-  width: auto;
+  width: 900px;
   margin-left: 40px;
   height: 350px;
   display: flex;

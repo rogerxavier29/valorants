@@ -20,17 +20,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
 import Adicionar from '../../assets/adicionar.svg';
-import Jett from '../../assets/Jett.png';
-import Raze from '../../assets/Raze.png';
-import Breach from '../../assets/Breach.png';
-import Omen from '../../assets/Omen.png';
-import Brimstone from '../../assets/Brimstone.png';
-import Phoenix from '../../assets/Phoenix.png';
-import Sage from '../../assets/Sage.png';
-import Sova from '../../assets/Sova.png';
-import Viper from '../../assets/Viper.png';
-import Cypher from '../../assets/Cypher.png';
-import Reyna from '../../assets/Reyna.png';
 
 import ModalAgents from './modalAddAgent';
 import ModalSkill from './modalSkillAgents';
@@ -51,6 +40,11 @@ const Agents: React.FC = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const onFinish = (data: any) => {
+    setAgents(data);
+    setOpenModal(false);
+  };
+
   return (
     <Content>
       {openModalSkill ? (
@@ -64,7 +58,12 @@ const Agents: React.FC = () => {
       )}
 
       {openModal ? (
-        <ModalAgents open={openModal} closeModal={() => setOpenModal(false)} />
+        <ModalAgents
+          open={openModal}
+          closeModal={() => setOpenModal(false)}
+          agentValorant={agents}
+          newAgent={onFinish}
+        />
       ) : (
         ''
       )}
@@ -143,29 +142,7 @@ const Agents: React.FC = () => {
         {agents?.map((data: any) => (
           <Persona>
             <div onClick={() => setOpenModalSkill(data)}>
-              {data?.name === 'Jett' ? (
-                <img src={Jett} alt='Agente Jett' />
-              ) : data.name === 'Raze' ? (
-                <img src={Raze} alt='Agente Jett' />
-              ) : data.name === 'Breach' ? (
-                <img src={Breach} alt='Agente Jett' />
-              ) : data.name === 'Omen' ? (
-                <img src={Omen} alt='Agente Jett' />
-              ) : data.name === 'Brimstone' ? (
-                <img src={Brimstone} alt='Agente Jett' />
-              ) : data.name === 'Phoenix' ? (
-                <img src={Phoenix} alt='Agente Jett' />
-              ) : data.name === 'Sage' ? (
-                <img src={Sage} alt='Agente Jett' />
-              ) : data.name === 'Sova' ? (
-                <img src={Sova} alt='Agente Jett' />
-              ) : data.name === 'Viper' ? (
-                <img src={Viper} alt='Agente Jett' />
-              ) : data.name === 'Cypher' ? (
-                <img src={Cypher} alt='Agente Jett' />
-              ) : data.name === 'Reyna' ? (
-                <img src={Reyna} alt='Agente Jett' />
-              ) : null}
+              <img src={data.image} alt='' />
               <p>{data?.name}</p>
             </div>
           </Persona>
