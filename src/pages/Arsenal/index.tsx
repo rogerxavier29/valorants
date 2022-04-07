@@ -1,8 +1,7 @@
 import React from "react";
-import { Guns } from "./styles";
+import { Content, Guns } from "./styles";
 import Alvo from "../../assets/Alvo.svg";
 import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Arma01 from "../../assets/arma01.png";
 import Arma02 from "../../assets/arma02.png";
 import Arma03 from "../../assets/arma03.png";
@@ -32,58 +31,59 @@ const Arsenal: React.FC = () => {
   };
 
   return (
-    <Guns id="armas">
-      <div>
-        <h1>Escolha sua arma</h1>
-        <img src={Alvo} alt="" className="alvo" />
-      </div>
+    <Content>
+      <Guns id="armas">
+        <div>
+          <h1>Escolha sua arma</h1>
+          <img src={Alvo} alt="" className="alvo" />
+        </div>
 
-      <h2>Arma primaria</h2>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        className="Tabs-images"
-      >
-        <img src={Arma01} alt="" />
-        <img src={Arma02} alt="" />
-        <img src={Arma03} alt="" />
-        <img src={Arma04} alt="" />
-        <img src={Arma05} alt="" />
-      </Tabs>
+        <h2>Arma primaria</h2>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          className="Tabs-images"
+        >
+          <img src={Arma01} alt="" />
+          <img src={Arma02} alt="" />
+          <img src={Arma03} alt="" />
+          <img src={Arma04} alt="" />
+          <img src={Arma05} alt="" />
+        </Tabs>
 
-      <h2>Arma secundaria</h2>
-      <Tabs
-        value={value1}
-        onChange={handleChange2}
-        variant="scrollable"
-        scrollButtons="auto"
-        className="Tabs-images"
-      >
-        <img src={ArmaSec01} alt="" />
-        <img src={ArmaSec02} alt="" />
-        <img src={ArmaSec03} alt="" />
-        <img src={ArmaSec04} alt="" />
-        <img src={ArmaSec05} alt="" />
-      </Tabs>
+        <h2>Arma secundaria</h2>
+        <Tabs
+          value={value1}
+          onChange={handleChange2}
+          variant="scrollable"
+          scrollButtons="auto"
+          className="Tabs-images"
+        >
+          <img src={ArmaSec01} alt="" />
+          <img src={ArmaSec02} alt="" />
+          <img src={ArmaSec03} alt="" />
+          <img src={ArmaSec04} alt="" />
+          <img src={ArmaSec05} alt="" />
+        </Tabs>
 
-      <h2>Arma branca</h2>
-      <Tabs
-        value={value1}
-        onChange={handleChange2}
-        variant="scrollable"
-        scrollButtons="auto"
-        className="Tabs-images"
-      >
-        <img src={ArmaBran01} alt="" />
-        <img src={ArmaBran02} alt="" />
-        <img src={ArmaBran03} alt="" />
-        <img src={ArmaBran04} alt="" />
-      </Tabs>
-
-      {/* <img src={Cypher2} alt="" /> */}
-    </Guns>
+        <h2>Arma branca</h2>
+        <Tabs
+          value={value1}
+          onChange={handleChange2}
+          variant="scrollable"
+          scrollButtons="auto"
+          className="Tabs-images"
+        >
+          <img src={ArmaBran01} alt="" />
+          <img src={ArmaBran02} alt="" />
+          <img src={ArmaBran03} alt="" />
+          <img src={ArmaBran04} alt="" />
+        </Tabs>
+      </Guns>
+      <img src={Cypher2} className="cypher2" alt="" />
+    </Content>
   );
 };
 

@@ -1,5 +1,17 @@
 import styled from "styled-components";
 
+export const Content = styled.div`
+  display: flex;
+
+  img.cypher2 {
+    display: flex;
+    justify-content: end;
+    margin-top: 240px;
+    width: 500px;
+    height: 900px;
+  }
+`;
+
 export const Guns = styled.div`
   width: 500px;
   height: auto;
@@ -7,6 +19,7 @@ export const Guns = styled.div`
   margin-left: 30px;
   display: grid;
   justify-content: center;
+
   div {
     display: flex;
     h1 {
